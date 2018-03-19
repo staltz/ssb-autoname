@@ -22,7 +22,7 @@
     "@types/node": "^9.4.6",
     "ts-node": "^4.1.0",
     "typescript": "^2.7.2",
-    "scuttle-testbot": "1.1.5",
+    "scuttle-testbot": "1.1.6",
     "ssb-keys": "^7.0.14",
     "tape": "4.9.0"
   },
