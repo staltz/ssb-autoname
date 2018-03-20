@@ -48,6 +48,6 @@ function init(sbot: any, config: any) {
 
 export = {
   name: 'autoname',
-  version: '1.0.0',
+  version: '1.0.1',
   init: init,
 };
