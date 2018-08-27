@@ -50,4 +50,5 @@ export = {
   name: 'autoname',
   version: '1.0.1',
   init: init,
+  manifest: {},
 };
