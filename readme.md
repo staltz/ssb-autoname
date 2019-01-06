@@ -1,8 +1,10 @@
 # ssb-autoname
 
-> A Scuttlebot plugin that automatically names the feed based on the HOST env var
+> A Scuttlebot plugin that automatically names the feed based on the HOST env var or sbot's config
 
-Attempts to set the profile name when the sbot is initiated. If `$HOST` is set, and this account has never sent an 'about' message, then creates an about message with the name = `$HOST`. Otherwise, does nothing.
+Attempts to set the profile name when the sbot is initiated. If environment valriable `$HOST` is set,
+it will be used as the name property for an about message, otherwise `config.autoname` is used as the name.
+If the ssb identity already has published an about message, nothing happens.
 
 ## Usage
 
@@ -25,7 +27,7 @@ Attempts to set the profile name when the sbot is initiated. If `$HOST` is set, 
    .use(require('scuttlebot/plugins/local'))
 ```
 
-Then, make sure the `sbot` server is started with the environment variable `HOST` set with a string.
+Then, make sure the `sbot` server is started with the environment variable `HOST` set with a string, or add `autoname: "My name"` to `~/.ssb/config`.
 
 ## Install
 
