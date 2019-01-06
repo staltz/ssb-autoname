@@ -1,12 +1,16 @@
 var test = require('tape');
 var pull = require('pull-stream');
 var ssbKeys = require('ssb-keys');
-var CreateTestSbot = require('scuttle-testbot').use(require('./lib/index'));
+var {createSbot} = require('scuttlebot');
 
 var lucyKeys = ssbKeys.generate();
 
 test('sets the name to be the hostname', function(t) {
-  var myTestSbot = CreateTestSbot({ name: 'test1', keys: lucyKeys });
+  process.env.HOST = 'wintermute'
+  var myTestSbot = createSbot().use(require('.'))({
+    temp: true,
+    keys: lucyKeys
+  });
   var lucy = myTestSbot.createFeed(lucyKeys);
 
   setTimeout(() => {
