@@ -19,7 +19,7 @@ const errorPublishMissing =
 
 function init(sbot: any, config: any) {
   let aboutMsg: any = null;
-  const hostname = process.env.HOST;
+  const hostname = process.env.HOST || config.autoname;
   if (!hostname) return debug(errorHostnameMissing);
   if (!sbot.whoami) return debug(errorWhoamiMissing);
   if (!sbot.publish) return debug(errorPublishMissing);
