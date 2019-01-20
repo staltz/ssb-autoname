@@ -1,28 +1,29 @@
 import { Msg, AboutContent } from 'ssb-typescript';
 import { isAboutMsg } from 'ssb-typescript/utils';
-import createDebug = require('debug');
+const Log = require('./log');
 const pull = require('pull-stream');
 const pkg = require('../package.json');
-const debug = createDebug(pkg.name);
 
 const errorHostnameMissing =
-  'ERROR: Failed to self-assign a name because ' +
+  'Failed to self-assign a name because ' +
   'the HOST env variable was missing.';
 
 const errorWhoamiMissing =
-  'ERROR: Failed to self-assign a name because ' +
+  'Failed to self-assign a name because ' +
   'the current sbot is missing the `sbot.whoami` API.';
 
 const errorPublishMissing =
-  'ERROR: Failed to self-assign a name because ' +
+  'Failed to self-assign a name because ' +
   'the current sbot is missing the `sbot.publish` API.';
 
 function init(sbot: any, config: any) {
+  const {error, warning, notice, info} = Log(sbot, 'autoname')
+  
   let aboutMsg: any = null;
   const hostname = process.env.HOST || config.autoname;
-  if (!hostname) return debug(errorHostnameMissing);
-  if (!sbot.whoami) return debug(errorWhoamiMissing);
-  if (!sbot.publish) return debug(errorPublishMissing);
+  if (!hostname) return error(errorHostnameMissing);
+  if (!sbot.whoami) return error(errorWhoamiMissing);
+  if (!sbot.publish) return error(errorPublishMissing);
 
   pull(
     pull.values([null]),
@@ -36,11 +37,11 @@ function init(sbot: any, config: any) {
     pull.collect((err: any, msgs: Array<any>) => {
       if (msgs.length === 0) {
         sbot.publish(aboutMsg, (err: any, info: string) => {
-          if (err) debug('ERROR: Could not update profile name.', err);
-          else debug('INFO: Profile name updated as expected.');
+          if (err) error('Could not update profile name.', err);
+          else notice('Profile name updated as expected.');
         });
       } else {
-        debug('INFO: There already was an About message.');
+        info('There already was an About message.');
       }
     }),
   );

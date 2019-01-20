@@ -28,7 +28,7 @@
     "typescript": "^2.7.2"
   },
   "scripts": {
-    "compile": "tsc",
+    "compile": "tsc && cp log.js lib/",
     "pretest": "npm run compile",
     "test": "tape test.js"
   }
