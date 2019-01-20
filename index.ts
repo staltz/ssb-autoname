@@ -21,7 +21,7 @@ function init(sbot: any, config: any) {
   
   let aboutMsg: any = null;
   const hostname = process.env.HOST || config.autoname;
-  if (!hostname) return error(errorHostnameMissing);
+  if (!hostname) return notice(errorHostnameMissing);
   if (!sbot.whoami) return error(errorWhoamiMissing);
   if (!sbot.publish) return error(errorPublishMissing);
 
