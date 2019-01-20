@@ -1,6 +1,6 @@
 {
   "name": "ssb-autoname",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Scuttlebot plugin that automatically self-assigns a name based on HOST",
   "repository": {
     "type": "git",
